@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gentallela Alela! | </title>
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom styling plus plugins -->
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/icheck/flat/green.css" rel="stylesheet">
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/sha256.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="../assets/js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+<body class="nav-md">
+
+<div class="container body">
+
+
+    <div class="main_container">
+
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="main.html" class="site_title"><i class="fa fa-television"></i>
+                        <span>Media Monitoring</span></a>
+                </div>
+                <div class="clearfix"></div>
+
+                <!-- menu prile quick info -->
+                <div class="profile">
+                    <div class="profile_pic">
+                        <img src="images/person-icon.png" alt="..." class="img-circle profile_img">
+                    </div>
+                    <div class="profile_info">
+                        <span>Welcome,</span>
+                        <h2 id="fullname_welcome"></h2>
+                        <h2>&nbsp;</h2>
+                    </div>
+                </div>
+                <!-- /menu prile quick info -->
+
+                <br/>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+                    <div class="menu_section">
+                        <h3>System Menues</h3>
+                        <ul class="nav side-menu">
+                            <li><a href="main.html"><i class="fa fa-home"></i> Dashboard </a></li>
+                            <li>
+                                <a><i class="fa fa-paper-plane"></i> Notifications <span
+                                        class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="push.html">Push Notification</a>
+                                    </li>
+                                    <li><a href="inapp.html">In-Apps Notification</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a><i class="fa fa-edit"></i> Stream Management <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="stream-overview.html">Overview</a>
+                                    </li>
+                                    <li><a href="stream-add.html">Add new streaming</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-desktop"></i> UI Management <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="ui-overview.html">Overview</a>
+                                    </li>
+                                    <li><a href="ui-mgmt-category.html">UI Category Management</a>
+                                    </li>
+                                    <li><a href="ui-mgmt-template.html">UI Template Management</a>
+                                    </li>
+                                    <li><a href="ui-mgmt-icons.html">UI Icons Management</a>
+                                    </li>
+                                    <li><a href="ui-mgmt-banner.html">UI Banners Management</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="local-user-mgmt.html">Local User Management</a>
+                                    </li>
+                                    <li><a href="customer-account-mgmt.html">Customer Account Management</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-bar-chart-o"></i> Reports <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="app-usage-rep.html">Application Usage Report</a>
+                                    </li>
+                                    <li><a href="stream-usage-rep.html">Stream Usage report</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+
+            <div class="nav_menu">
+                <nav class="" role="navigation">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="images/person-icon.png" alt=""><span id="fullname_head"></span>
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="javascript:;"> Profile</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="badge bg-red pull-right">50%</span>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">Help</a>
+                                </li>
+                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li role="presentation" class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="badge bg-green">6</span>
+                            </a>
+                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                <li>
+                                    <a>
+                      <span class="image">
+                                        <img src="images/img.jpg" alt="Profile Image"/>
+                                    </span>
+                      <span>
+                                        <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                    </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                      <span class="image">
+                                        <img src="images/img.jpg" alt="Profile Image"/>
+                                    </span>
+                      <span>
+                                        <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                    </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                      <span class="image">
+                                        <img src="images/img.jpg" alt="Profile Image"/>
+                                    </span>
+                      <span>
+                                        <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                    </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                      <span class="image">
+                                        <img src="images/img.jpg" alt="Profile Image"/>
+                                    </span>
+                      <span>
+                                        <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                    </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="text-center">
+                                        <a>
+                                            <strong>See All Alerts</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Local User Management</h3>
+                    </div>
+
+
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="addlocaluser">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Add new local user
+                                    <small id="addalert"></small>
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class=" ">&nbsp;</a>
+                                    </li>
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a onclick="hideadd()"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+                                <form class="form-horizontal form-label-left input_mask">
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" id="add_firstname"
+                                               placeholder="First Name">
+                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control" id="add_lastname"
+                                               placeholder="Last Name">
+                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" id="add_username"
+                                               placeholder="Username">
+                                        <span class="fa fa-tag form-control-feedback left" aria-hidden="true"
+                                              id="username_tag"></span>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="password" class="form-control" id="add_password"
+                                               placeholder="Password">
+                                        <span class="fa fa-exclamation-triangle form-control-feedback right"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-0">
+                                            <a class="btn btn-primary" id="add_cancel">Cancel</a>
+                                            <a class="btn btn-success" id="add_submit">Submit</a>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="editlocaluser">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Edit local user
+                                    <small id="editalert"></small>
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class=" ">&nbsp;</a>
+                                    </li>
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a onclick="hideedit()"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+                                <form class="form-horizontal form-label-left input_mask">
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left"
+                                               placeholder="First Name" id="edit_firstname">
+                                        <input type="hidden" id="edit_uid">
+                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control" placeholder="Last Name"
+                                               id="edit_lastname">
+                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="password" class="form-control has-feedback-left"
+                                               placeholder="Password" id="edit_password">
+                                        <span class="fa fa-exclamation-triangle form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-0 form-group">
+                                  <span>
+                                      <input type="checkbox" class="flat" id="edit_enabled" name="edit_enabled"> Enabled
+                                  </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-0">
+                                            <a class="btn btn-primary" id="edit_cancel">Cancel</a>
+                                            <a class="btn btn-success" id="edit_submit">Submit</a>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Local Users List
+                                    <small></small>
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a class=" " id="addenable"><i class="fa fa-plus"></i></a>
+                                    </li>
+                                    <li><a class=" "><i class="fa fa-trash"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+
+                                <table class="table table-striped responsive-utilities jambo_table bulk_action">
+                                    <thead>
+                                    <tr class="headings">
+                                        <th>
+                                            <input type="checkbox" id="check-all" class="flat">
+                                        </th>
+                                        <th class="column-title">User-ID</th>
+                                        <th class="column-title">Username</th>
+                                        <th class="column-title">Firstname</th>
+                                        <th class="column-title">Lastname</th>
+                                        <th class="column-title">Created</th>
+                                        <th class="column-title">Last Login</th>
+                                        <th class="column-title" align="center">Status</th>
+                                        <th class="column-title no-link last"><span class="nobr">Action</span>
+                                        </th>
+                                        <th class="bulk-actions" colspan="8">
+                                            <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span
+                                                    class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="localusertable">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    VGI Media Monitoring Backend Software by Huakati-IT Co., Ltd
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+        <!-- /page content -->
+    </div>
+
+</div>
+
+<div id="custom_notifications" class="custom-notifications dsp_none">
+    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+    </ul>
+    <div class="clearfix"></div>
+    <div id="notif-group" class="tabbed_notifications"></div>
+</div>
+
+<script src="js/bootstrap.min.js"></script>
+
+<!-- bootstrap progress js -->
+<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
+<!-- icheck -->
+<script src="js/icheck/icheck.min.js"></script>
+
+<script src="js/custom.js"></script>
+
+<!-- pace -->
+<script src="js/pace/pace.min.js"></script>
+<script>
+    page = "local-user-mgmt";
+</script>
+<script src="js/server.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
