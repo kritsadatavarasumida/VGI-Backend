@@ -252,73 +252,433 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Overview Dashboard</h3>
+                        <h3>Projects
+                            <small>Listing design</small>
+                        </h3>
                     </div>
 
-
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go!</button>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
-
-                <div class="row">
+                <div class="row" id="addwizard">
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel" style="height:600px;">
+                        <div class="x_panel">
                             <div class="x_title">
-                                <h2> Media Monitoring Dashboard : </h2>
+                                <h2>Form Wizards
+                                    <small>Sessions</small>
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">Settings 1</a>
+                                            </li>
+                                            <li><a href="#">Settings 2</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a id="addwizardclose"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="row tile_count">
-                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                                    <div class="left"></div>
-                                    <div class="right">
-                                        <span class="count_top"><i class="fa fa-database"></i> Database </span>
-                                        <div class="count"> UP</div>
+                            <div class="x_content">
+
+
+                                <!-- Smart Wizard -->
+                                <p>This is a basic form wizard example that inherits the colors from the selected
+                                    scheme.</p>
+                                <div id="wizard" class="form_wizard wizard_horizontal">
+                                    <ul class="wizard_steps">
+                                        <li>
+                                            <a href="#step-1">
+                                                <span class="step_no">1</span>
+                          <span class="step_descr">
+                                            Step 1<br/>
+                                            <small>Step 1 Customer Information</small>
+                                        </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#step-2">
+                                                <span class="step_no">2</span>
+                          <span class="step_descr">
+                                            Step 2<br/>
+                                            <small>Step 2 Contact Person(s)</small>
+                                        </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#step-3">
+                                                <span class="step_no">3</span>
+                          <span class="step_descr">
+                                            Step 3<br/>
+                                            <small>Step 3 Password Setup</small>
+                                        </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#step-4">
+                                                <span class="step_no">4</span>
+                          <span class="step_descr">
+                                            Step 4<br/>
+                                            <small>Step 4 Information Confirmation</small>
+                                        </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div id="step-1">
+                                        <form class="form-horizontal form-label-left">
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="customer-login">Customer Login <span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="customer-login" name="customerlogin"
+                                                           required="required" class="form-control col-md-7 col-xs-12"
+                                                           placeholder="Username">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email" class="control-label col-md-3 col-sm-3 col-xs-12">Email
+                                                    <span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="email" class="form-control col-md-7 col-xs-12"
+                                                           required="required" type="text" name="email"
+                                                           placeholder="youremail@yourdomain.com">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="phone" class="control-label col-md-3 col-sm-3 col-xs-12">Phone
+                                                    <span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="phone" class="form-control col-md-7 col-xs-12"
+                                                           required="required" type="text" name="phone"
+                                                           placeholder="Format : xxx-xxx-xxxx">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="vgi" class="control-label col-md-3 col-sm-3 col-xs-12">VGI
+                                                    Contact <span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="vgi" class="form-control col-md-7 col-xs-12"
+                                                           required="required" type="text" name="vgi"
+                                                           placeholder="sales-email@vgi">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="company_name"
+                                                       class="control-label col-md-3 col-sm-3 col-xs-12">Company
+                                                    Name</label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="company_name" class="form-control col-md-7 col-xs-12"
+                                                           type="text" name="company_name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="company_description"
+                                                       class="control-label col-md-3 col-sm-3 col-xs-12">Company
+                                                    Description</label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="company_description"
+                                                           class="form-control col-md-7 col-xs-12" type="text"
+                                                           name="company_description">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="company_logo"
+                                                       class="control-label col-md-3 col-sm-3 col-xs-12">Company
+                                                    Logo</label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="company_logo" class="form-control col-md-7 col-xs-12"
+                                                           type="text" name="company_logo">
+                                                </div>
+                                            </div>
+
+                                        </form>
+
                                     </div>
-                                </div>
-                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                                    <div class="left"></div>
-                                    <div class="right">
-                                        <span class="count_top"><i class="fa fa-code-fork"></i> Application API </span>
-                                        <div class="count"> UP</div>
+                                    <div id="step-2">
+                                        <h2 class="StepTitle">Step 2 Contact Person(s)</h2>
+                                        <form class="form-horizontal form-label-left">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="contact-person1">Contact Person #1 <span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="contact-person1" name="contact1"
+                                                           required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="contact-mobile1">Contact Mobile #1 <span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="contact-mobile1" name="mobile1"
+                                                           required="required" class="form-control col-md-7 col-xs-12"
+                                                           placeholder="Format : xxx-xxx-xxxx">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="contact-person2">Contact Person #2
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="contact-person2" name="contact2"
+                                                           class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="contact-mobile2">Contact Mobile #2
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="contact-mobile2" name="mobile2"
+                                                           class="form-control col-md-7 col-xs-12"
+                                                           placeholder="Format : xxx-xxx-xxxx">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="contact-person3">Contact Person #3
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="contact-person3" name="contact3"
+                                                           class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="contact-mobile3">Contact Mobile #3
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="contact-mobile3" name="mobile3"
+                                                           class="form-control col-md-7 col-xs-12"
+                                                           placeholder="Format : xxx-xxx-xxxx">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="contact-person4">Contact Person #4
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="contact-person4" name="contact4"
+                                                           class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="contact-mobile4">Contact Mobile #4
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="contact-mobile4" name="mobile4"
+                                                           class="form-control col-md-7 col-xs-12"
+                                                           placeholder="Format : xxx-xxx-xxxx">
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </div>
-                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                                    <div class="left"></div>
-                                    <div class="right">
-                                        <span class="count_top"><i
-                                                class="fa fa-video-camera"></i> Streaming Server </span>
-                                        <div class="green count"> UP</div>
+                                    <div id="step-3">
+                                        <h2 class="StepTitle">Step 3 Password Setup</h2>
+                                        <form class="form-horizontal form-label-left">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="userpassword">Password <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="password" id="userpassword" name="userpassword"
+                                                           required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                       for="confirmpassword">Confirm Password <span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="password" id="confirmpassword" name="confirmpassword"
+                                                           required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row tile_count">
-                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                                    <div class="left"></div>
-                                    <div class="right">
-                                        <span class="count_top"><i
-                                                class="fa fa-file-video-o"></i> No. of Streams </span>
-                                        <div class="count"> 151</div>
+                                    <div id="step-4">
+                                        <h2 class="StepTitle">Step 4 Information Confirmation</h2>
+                                        <table class="table table-striped projects">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 1%">ID</th>
+                                                <th style="width: 20%">Customer Login</th>
+                                                <th>Contact Person</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>VGI Contact</th>
+                                                <th>Password</th>
+                                                <th style="width: 20%">Company Logo</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>#</td>
+                                                <td>
+                                                    <a id="lbl-customer-login"></a>
+                                                    <br/>
+                                                    <small></small>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline" id="contactperson">
+
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    <a id="lbl-customer-email"></a>
+                                                    <br/>
+                                                    <small id="lbl-customer-company-name"></small>
+                                                </td>
+                                                <td>
+                                                    <a id="lbl-customer-phone"></a>
+                                                    <br/>
+                                                    <small></small>
+                                                </td>
+                                                <td>
+                                                    <a id="lbl-customer-vgi"></a>
+                                                    <br/>
+                                                    <small></small>
+                                                </td>
+                                                <td>
+                                                    <a id="lbl-customer-plainpassword"></a>
+                                                    <br/>
+                                                    <small></small>
+                                                </td>
+                                                <td>
+                                                    <img src=http://design.ubuntu.com/wp-content/uploads/ubuntu-logo32.png
+                                                         height=32px id="lbl-customer-company-logo"></img>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
+
                                 </div>
-                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                                    <div class="left"></div>
-                                    <div class="right">
-                                        <span class="count_top"><i class="fa fa-users"></i> No. of Customers </span>
-                                        <div class="count"> 50</div>
-                                    </div>
-                                </div>
-                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                                    <div class="left"></div>
-                                    <div class="right">
-                                        <span class="count_top"><i
-                                                class="fa fa-circle-o-notch"></i> No. of Views </span>
-                                        <div class="count"> 5000</div>
-                                    </div>
-                                </div>
+                                <!-- End SmartWizard Content -->
+
+
+                                <!-- End SmartWizard Content -->
+
+
                             </div>
                         </div>
                     </div>
 
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Projects</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a class=" " id="addnewwizard"><i class="fa fa-plus"></i></a>
+                                    </li>
+                                    <li><a class=" "><i class="fa fa-trash"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+
+                                <p>Simple table with project listing with progress and editing options</p>
+
+                                <!-- start project list -->
+                                <table class="table table-striped projects">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 1%">ID</th>
+                                        <th style="width: 20%">Customer Login</th>
+                                        <th>Contact Person</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>VGI Contact</th>
+                                        <th>Last Login</th>
+                                        <th style="width: 20%">#Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="customertable">
+                                    <tr>
+                                        <td>#</td>
+                                        <td>
+                                            <a>Pesamakini Backend UI</a>
+                                            <br/>
+                                            <small>Created 01.01.2015</small>
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <img src="images/user.png" class="avatar" alt="Avatar">
+                                                </li>
+                                                <li>
+                                                    <img src="images/user.png" class="avatar" alt="Avatar">
+                                                </li>
+                                                <li>
+                                                    <img src="images/user.png" class="avatar" alt="Avatar">
+                                                </li>
+                                                <li>
+                                                    <img src="images/user.png" class="avatar" alt="Avatar">
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="project_progress">
+                                            <div class="progress progress_sm">
+                                                <div class="progress-bar bg-green" role="progressbar"
+                                                     data-transitiongoal="57"></div>
+                                            </div>
+                                            <small>57% Complete</small>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-xs">Success</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-xs">Success</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-xs">Success</button>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View
+                                            </a>
+                                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit
+                                            </a>
+                                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
+                                                Delete </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- end project list -->
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -352,9 +712,143 @@
 <script src="js/icheck/icheck.min.js"></script>
 
 <script src="js/custom.js"></script>
-
+<!-- form wizard -->
+<script type="text/javascript" src="js/wizard/jquery.smartWizard.js"></script>
 <!-- pace -->
 <script src="js/pace/pace.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Smart Wizard
+        $('#wizard').smartWizard({
+            onLeaveStep: leaveAStepCallback,
+            onFinish: onFinishCallback
+        });
+
+        function leaveAStepCallback(obj, context) {
+            //alert("Leaving step " + context.fromStep + " to go to step " + context.toStep);
+            return validateSteps(context.fromStep); // return false to stay on step and true to continue navigation
+        }
+
+        function onFinishCallback(objs, context) {
+            if (validateAllSteps()) {
+                var formData = "username=" + $('#customer-login').val() + "&email=" + $('#email').val() + "&phone=" + $('#phone').val() + "&vgi=" + $('#vgi').val() + "&contact1=" + $('#contact-person1').val() + "&contact2=" + $('#contact-person2').val() + "&contact3=" + $('#contact-person3').val();
+                formData += "&contact4=" + $('#contact-person4').val() + "&mobile1=" + $('#contact-mobile1').val() + "&mobile2=" + $('#contact-mobile2').val() + "&mobile3=" + $('#contact-mobile3').val() + "&mobile4=" + $('#contact-mobile4').val() + "&password=" + sha256($('#userpassword').val());
+                formData += "&company_name=" + $('#company_name').val() + "&company_description=" + $('#company_description').val() + "&company_logo=" + $('#company_logo').val();
+                $.ajax({
+                    url: serverURL + "add_customeraccount.php",
+                    type: "POST",
+                    data: formData,
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(JSON.stringify(data.data));
+                        //data - response from server
+
+                        try {
+                            window.location = "customer-account-mgmt.html";
+                        } catch (e) {
+
+                        }
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR);
+                    }
+                });
+                console.log("all done");
+            }
+        }
+
+        function validateSteps(stepnumber) {
+            var isStepValid = true;
+            // validate step 1
+            if (stepnumber == 1) {
+
+                var condition = 0;
+
+                if (validuser && $('#customer-login').val() && isEmailAddress($('#email').val()) && isPhoneNumber($('#phone').val()) && isEmailAddress($('#vgi').val())) {
+                    condition = 1;
+                }
+                if ($('#company_logo').val()) {
+                    $('#lbl-customer-company-logo').show();
+                    $('#lbl-customer-company-logo').attr('src', JSON.stringify($('#company_logo').val()).replace(/\"/g, ''));
+                } else {
+                    $('#lbl-customer-company-logo').hide();
+                }
+                // Your step validation logic
+                // set isStepValid = false if has errors
+                if (condition == 1) {
+
+                    return isStepValid;
+                }
+
+            }
+
+            if (stepnumber == 2) {
+                var condition = 0;
+                var html = "";
+                if ($('#contact-person1').val() && isPhoneNumber($('#contact-mobile1').val())) {
+                    condition = 1;
+                    html += '<li> <img src="images/user.png" class="avatar" alt="Avatar" title="Contact: ' + $("#contact-person1").val() + '\nMobile: ' + $("#contact-mobile1").val() + '"> </li>';
+                }
+
+                if ($('#contact-person2').val() && isPhoneNumber($('#contact-mobile2').val())) {
+                    html += '<li> <img src="images/user.png" class="avatar" alt="Avatar" title="Contact: ' + $("#contact-person2").val() + '\nMobile: ' + $("#contact-mobile2").val() + '"> </li>';
+                }
+
+                if ($('#contact-person3').val() && isPhoneNumber($('#contact-mobile3').val())) {
+                    html += '<li> <img src="images/user.png" class="avatar" alt="Avatar" title="Contact: ' + $("#contact-person3").val() + '\nMobile: ' + $("#contact-mobile3").val() + '"> </li>';
+                }
+
+                if ($('#contact-person4').val() && isPhoneNumber($('#contact-mobile4').val())) {
+                    html += '<li> <img src="images/user.png" class="avatar" alt="Avatar" title="Contact: ' + $("#contact-person4").val() + '\nMobile: ' + $("#contact-mobile4").val() + '"> </li>';
+                }
+
+                $('#contactperson').html(html);
+
+                // Your step validation logic
+                // set isStepValid = false if has errors
+                if (condition == 1) {
+                    return isStepValid;
+                }
+            }
+
+            if (stepnumber == 3) {
+                var condition = 0;
+
+                if ($('#userpassword').val() && ($('#userpassword').val() == $('#confirmpassword').val())) {
+                    $('#lbl-customer-plainpassword').html('<button type="button" class="btn btn-success btn-xs" id="hidepassword">********</button>');
+                    document.getElementById('hidepassword').addEventListener('click', function () {
+                        document.getElementById('hidepassword').innerHTML = $('#userpassword').val();
+                    })
+                    condition = 1;
+                }
+                // Your step validation logic
+                // set isStepValid = false if has errors
+                if (condition == 1) {
+                    return isStepValid;
+                }
+            }
+
+            if (stepnumber == 4) {
+                var condition = 1;
+                // Your step validation logic
+                // set isStepValid = false if has errors
+                if (condition == 1) {
+                    return isStepValid;
+                }
+            }
+            // ...
+        }
+
+        function validateAllSteps() {
+            var isStepValid = true;
+            // all step validation logic
+            return isStepValid;
+        }
+    });
+
+</script>
+
 <script>
     page = "customer-account-mgmt";
 </script>
