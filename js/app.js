@@ -211,7 +211,7 @@ if (page === "local-user-mgmt") {
             var html = "";
             for (var i = 0; i < data.data.length; i++) {
                 html += '<tr class="even pointer">';
-                html += '<td class="a-center "><input type="checkbox" class="flat" name="table_records" id="userbox"' + i + '></td>"';
+                html += '<td class="a-center "><input type="checkbox" class="flat" name="table_records" id="userbox' + i + '"></td>"';
                 html += '<td class=" ">' + data.data[i].uid + '</td>';
                 html += '<td class=" ">' + data.data[i].username + '</td>';
                 html += '<td class=" ">' + data.data[i].firstname + '</td>';
@@ -420,3 +420,69 @@ if (page === "customer-profile") {
         }
     });
 }
+
+if (page === "push") {
+    var tags = [];
+    var formData = "";
+    $.ajax({
+        url: serverURL + "list-tags-mapping.php",
+        type: "POST",
+        data: formData,
+        success: function (data, textStatus, jqXHR) {
+            console.log(JSON.stringify(data.data));
+
+            //data - response from server
+
+
+            for (var i = 0; i < data.data.length; i++) {
+                html = "";
+                //console.log(data.data.length);
+                if (i == 0) {
+                    tags.push(data.data[i].tid);
+                    html = '<tr class="even pointer">';
+                    html += '<td class="a-center "><input class="icheckbox_flat-green" type="checkbox" class="flat" name="table_records"></td>';
+                    html += '<td class=" ">' + data.data[i].tid + '</td>';
+                    html += '<td class=" ">' + data.data[i].tag_name + '</td>';
+                    html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '">' + data.data[i].username + '</td>';
+                    html += '<td class=" last"><a href="#" ><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                    html += '</tr>';
+                } else {
+                    var tagsexist = 0;
+                    for (var j = 0; j < tags.length; j++) {
+                        if (data.data[i].tid == tags[j]) {
+                            tagsexist = 1;
+
+                        }
+
+                    }
+                    if (tagsexist == 1) {
+                        $("#lbl-tag-" + data.data[i].tid).append(", " + data.data[i].username);
+                    } else {
+                        tags.push(data.data[i].tid);
+                        html = '<tr class="odd pointer">';
+                        html += '<td class="a-center "><input class="icheckbox_flat-green" type="checkbox" class="flat" name="table_records" id="userbox' + i + '"></td>"';
+                        html += '<td class=" ">' + data.data[i].tid + '</td>';
+                        html += '<td class=" ">' + data.data[i].tag_name + '</td>';
+                        html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '">' + data.data[i].username + '</td>';
+                        html += '<td class=" last"><a href="#" ><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                        html += '</tr>';
+                    }
+                }
+                $('#overviewtagstable').append(html);
+            }
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
