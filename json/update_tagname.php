@@ -7,10 +7,11 @@ include('connect.php');
 header('Content-type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 $num=0;
-isset($_REQUEST['cid']) ? $cid = $_REQUEST['cid'] : $cid = '';
-$sql="delete from tbl_customer_account where cid = '".$cid."'";
-$result=mysql_query($sql) or die(mysql_error());
-$sql="delete from tbl_tags_mapping where cid = '".$cid."'";
+isset($_REQUEST['tid']) ? $tid = $_REQUEST['tid'] : $tid = '';
+isset($_REQUEST['tagname']) ? $tagname = $_REQUEST['tagname'] : $tagname = '';
+
+$sql="update tbl_tags set tag_name = '".$tagname."' where tid = '".$tid."'";
+
 $result=mysql_query($sql) or die(mysql_error());
 $num=mysql_affected_rows();
 $objJSON=new mysql2json();

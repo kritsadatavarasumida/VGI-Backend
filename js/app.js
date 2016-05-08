@@ -3,6 +3,14 @@
  */
 var validuser = 0;
 
+
+$(document).bind("ajaxSend", function () {
+
+}).bind("ajaxComplete", function () {
+
+});
+
+
 function getUrlVars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -211,7 +219,7 @@ if (page === "local-user-mgmt") {
             var html = "";
             for (var i = 0; i < data.data.length; i++) {
                 html += '<tr class="even pointer">';
-                html += '<td class="a-center "><input type="checkbox" class="flat" name="table_records" id="userbox' + i + '"></td>"';
+                //html += '<td class="a-center "><input type="checkbox" class="flat" name="table_records" id="userbox' + i + '"></td>"';
                 html += '<td class=" ">' + data.data[i].uid + '</td>';
                 html += '<td class=" ">' + data.data[i].username + '</td>';
                 html += '<td class=" ">' + data.data[i].firstname + '</td>';
@@ -440,11 +448,11 @@ if (page === "push") {
                 if (i == 0) {
                     tags.push(data.data[i].tid);
                     html = '<tr class="even pointer">';
-                    html += '<td class="a-center "><input class="icheckbox_flat-green" type="checkbox" class="flat" name="table_records"></td>';
+                    //html += '<td class="a-center"><input class="icheckbox_flat-green" type="checkbox" name="table_records"></td>';
                     html += '<td class=" ">' + data.data[i].tid + '</td>';
-                    html += '<td class=" ">' + data.data[i].tag_name + '</td>';
-                    html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '">' + data.data[i].username + '</td>';
-                    html += '<td class=" last"><a href="#" ><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                    html += '<td class=" " id="lbl-tagname-' + data.data[i].tid + '">' + data.data[i].tag_name + '</td>';
+                    html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '"><a href=# onclick=deletemember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")>' + data.data[i].username + '</a></td>';
+                    html += '<td class=" last"><a href="#" onclick=modifytags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletetags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;<a href="#" ><i class="fa fa-paper-plane" aria-hidden="true"></i></a></td>';
                     html += '</tr>';
                 } else {
                     var tagsexist = 0;
@@ -456,15 +464,15 @@ if (page === "push") {
 
                     }
                     if (tagsexist == 1) {
-                        $("#lbl-tag-" + data.data[i].tid).append(", " + data.data[i].username);
+                        $("#lbl-tag-" + data.data[i].tid).append(', <a href=# onclick=deletemember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")>' + data.data[i].username + '</a>');
                     } else {
                         tags.push(data.data[i].tid);
-                        html = '<tr class="odd pointer">';
-                        html += '<td class="a-center "><input class="icheckbox_flat-green" type="checkbox" class="flat" name="table_records" id="userbox' + i + '"></td>"';
+                        html = '<tr class="even pointer">';
+                        //html += '<td class="a-center"><input type="checkbox" class="icheckbox_flat-green" name="table_records" id="userbox' + i + '"></td>"';
                         html += '<td class=" ">' + data.data[i].tid + '</td>';
-                        html += '<td class=" ">' + data.data[i].tag_name + '</td>';
-                        html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '">' + data.data[i].username + '</td>';
-                        html += '<td class=" last"><a href="#" ><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                        html += '<td class=" " id="lbl-tagname-' + data.data[i].tid + '">' + data.data[i].tag_name + '</td>';
+                        html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '"><a href=# onclick=deletemember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")>' + data.data[i].username + '</a></td>';
+                        html += '<td class=" last"><a href="#" onclick=modifytags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletetags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;<a href="#" ><i class="fa fa-paper-plane" aria-hidden="true"></i></a></td>';
                         html += '</tr>';
                     }
                 }
@@ -476,8 +484,478 @@ if (page === "push") {
             console.log(jqXHR);
         }
     });
+
+    function deletetags(tid, tag_name) {
+        var r = confirm("Do you want to delete this Tags?\nTag Name: " + tag_name);
+        if (r == true) {
+            var formData = "tid=" + tid;
+            $.ajax({
+                url: serverURL + "delete_related_tags.php",
+                type: "POST",
+                data: formData,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(JSON.stringify(data.data));
+                    //data - response from server
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+            window.location = "push.html";
+        } else {
+
+        }
+    }
+
+    function deletemember(tid, tag_name, cid, username) {
+        var r = confirm("Do you want to remove this member?\nTag Name: " + tag_name + "\nMember: " + username);
+        if (r == true) {
+            var formData = "cid=" + cid + "&tid=" + tid;
+            $.ajax({
+                url: serverURL + "delete_customer_tags.php",
+                type: "POST",
+                data: formData,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(JSON.stringify(data.data));
+                    //data - response from server
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+            window.location = "push.html";
+        } else {
+
+        }
+    }
+
+    $('#tagadd_submit').on('click', function () {
+        var formData = "tagname=" + $('#tag_name').val();
+        $.ajax({
+            url: serverURL + "add_tag.php",
+            type: "POST",
+            data: formData,
+            success: function (data, textStatus, jqXHR) {
+                console.log(JSON.stringify(data.data));
+                //data - response from server
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+        window.location = "push.html";
+    })
+
+    $('#tag_name').on('keyup', function () {
+        var formData = "tagname=" + $('#tag_name').val();
+        $.ajax({
+            url: serverURL + "tagname_check.php",
+            type: "POST",
+            data: formData,
+            success: function (data, textStatus, jqXHR) {
+                console.log(JSON.stringify(data.data));
+                //data - response from server
+
+                try {
+                    if (data.data[0].tag_name == $('#tag_name').val()) {
+                        $('#tag_name').addClass("red");
+                        $('#tagadd_submit').hide();
+
+
+                    }
+
+                } catch (e) {
+                    $('#tag_name').removeClass("red");
+                    $('#tagadd_submit').show();
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+    })
+
+    $.ajax({
+        url: serverURL + "list-tags-all.php",
+        type: "POST",
+        data: formData,
+        success: function (data, textStatus, jqXHR) {
+            console.log(JSON.stringify(data.data));
+
+            //data - response from server
+
+
+            for (var i = 0; i < data.data.length; i++) {
+                html = "";
+                //console.log(data.data.length);
+                html = '<tr class="even pointer">';
+                //html += '<td class="a-center"><input class="icheckbox_flat-green" type="checkbox" name="table_records"></td>';
+                html += '<td class=" ">' + data.data[i].tid + '</td>';
+                html += '<td class=" " id="lbl-tagname-all-' + data.data[i].tid + '">' + data.data[i].tag_name + '</td>';
+                //html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '">' + data.data[i].username + '</td>';
+                html += '<td class=" last"><a href="#" onclick=modifytagsall(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletetags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                html += '</tr>';
+                $('#alltagstable').append(html);
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+
+    function modifytags(tid, tagname) {
+        var inputtxt = "";
+        inputtxt = '<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">';
+        inputtxt += '<input type="text" class="form-control has-feedback-left" placeholder="Tag Name" id="tag_temp' + tid + '" value=' + tagname + '>';
+        inputtxt += '<span class="fa fa-tag form-control-feedback left" aria-hidden="true"></span>';
+        inputtxt += '</div>';
+        inputtxt += '<a class="btn btn-success" id="tagtemp_submit' + tid + '">Submit</a>';
+        inputtxt += '<a class="btn btn-danger" id="tagtemp_cancel' + tid + '">Cancel</a>'
+        $('#lbl-tagname-' + tid).html(inputtxt);
+        $('#tag_temp' + tid).on('keyup', function () {
+            var formData = "tagname=" + $('#tag_temp' + tid).val();
+            $.ajax({
+                url: serverURL + "tagname_check.php",
+                type: "POST",
+                data: formData,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(JSON.stringify(data.data));
+                    //data - response from server
+
+                    try {
+                        if (data.data[0].tag_name == $('#tag_temp' + tid).val()) {
+                            $('#tag_temp' + tid).addClass("red");
+                            $('#tagtemp_submit' + tid).hide();
+
+
+                        }
+
+                    } catch (e) {
+                        $('#tag_temp' + tid).removeClass("red");
+                        $('#tagtemp_submit' + tid).show();
+                    }
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+        })
+
+        $('#tagtemp_submit' + tid).on('click', function () {
+            var r = confirm("Do you want to update this tags?\nTag Name: " + tagname + "\nnew Tag Name: " + $('#tag_temp' + tid).val());
+            if (r == true) {
+                var formData = "tid=" + tid + "&tagname=" + $('#tag_temp' + tid).val();
+                $.ajax({
+                    url: serverURL + "update_tagname.php",
+                    type: "POST",
+                    data: formData,
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(JSON.stringify(data.data));
+                        //data - response from server
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR);
+                    }
+                });
+                window.location = "push.html";
+            } else {
+
+            }
+        })
+
+        $('#tagtemp_cancel' + tid).on('click', function () {
+            $('#lbl-tagname-' + tid).html(tagname);
+        })
+    }
+
+    function modifytagsall(tid, tagname) {
+        var inputtxt = "";
+        inputtxt = '<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">';
+        inputtxt += '<input type="text" class="form-control has-feedback-left" placeholder="Tag Name" id="tag_temp_all' + tid + '" value=' + tagname + '>';
+        inputtxt += '<span class="fa fa-tag form-control-feedback left" aria-hidden="true"></span>';
+        inputtxt += '</div>';
+        inputtxt += '<a class="btn btn-success" id="tagtempall_submit' + tid + '">Submit</a>'
+        inputtxt += '<a class="btn btn-danger" id="tagtempall_cancel' + tid + '">Cancel</a>'
+        $('#lbl-tagname-all-' + tid).html(inputtxt);
+        $('#tag_temp_all' + tid).on('keyup', function () {
+            var formData = "tagname=" + $('#tag_temp_all' + tid).val();
+            $.ajax({
+                url: serverURL + "tagname_check.php",
+                type: "POST",
+                data: formData,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(JSON.stringify(data.data));
+                    //data - response from server
+
+                    try {
+                        if (data.data[0].tag_name == $('#tag_temp_all' + tid).val()) {
+                            $('#tag_temp_all' + tid).addClass("red");
+                            $('#tagtempall_submit' + tid).hide();
+
+
+                        }
+
+                    } catch (e) {
+                        $('#tag_temp_all' + tid).removeClass("red");
+                        $('#tagtempall_submit' + tid).show();
+                    }
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+        })
+
+        $('#tagtempall_submit' + tid).on('click', function () {
+            var r = confirm("Do you want to update this tags?\nTag Name: " + tagname + "\nnew Tag Name: " + $('#tag_temp_all' + tid).val());
+            if (r == true) {
+                var formData = "tid=" + tid + "&tagname=" + $('#tag_temp_all' + tid).val();
+                $.ajax({
+                    url: serverURL + "update_tagname.php",
+                    type: "POST",
+                    data: formData,
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(JSON.stringify(data.data));
+                        //data - response from server
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR);
+                    }
+                });
+                window.location = "push.html";
+            } else {
+
+            }
+        })
+        $('#tagtempall_cancel' + tid).on('click', function () {
+            $('#lbl-tagname-all-' + tid).html(tagname);
+        })
+
+    }
+
+
 }
 
+if (page === "stream_overview") {
+
+
+    $.ajax({
+        url: serverURL + "get_stream_list.php",
+        type: "POST",
+        data: formData,
+        success: function (data, textStatus, jqXHR) {
+            console.log(JSON.parse(data));
+            stream = JSON.parse(data);
+            allstream = stream.streamFiles;
+            console.log(allstream);
+            //data - response from server
+
+            for (var i = 0; i < allstream.length; i++) {
+                html = "";
+                //console.log(data.data.length);
+                html = '<tr class="even pointer">';
+                //html += '<td class="a-center"><input class="icheckbox_flat-green" type="checkbox" name="table_records"></td>';
+                html += '<td class=" " id="lbl-stream-' + allstream[i].id + '">' + allstream[i].id + '</td>';
+                html += '<td class=" " id="lbl-stream-href-' + allstream[i].id + '">' + allstream[i].href + '</td>';
+                html += '<td class=" " id="lbl-stream-status-' + allstream[i].id + '"><a href="#" onclick=connect_stream("' + allstream[i].id + '")>Not connected</a></td>';
+                //html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '">' + data.data[i].username + '</td>';
+                html += '<td class=" last"><a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-desktop" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletestream("' + allstream[i].id + '")><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                html += '</tr>';
+                $('#streamtable').append(html);
+                window['timeactive' + i] = setInterval(function (i) {
+                    //console.log(allstream);
+                    //console.log[i];
+                    try {
+                        checkstream(allstream[i].id, i);
+                    } catch (e) {
+
+                    }
+                }, 3000, i);
+
+            }
+
+            try {
+
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+
+    function checkstream(streamname, i) {
+        var formData = "streamname=" + streamname;
+        $.ajax({
+            url: serverURL + "get_stream_active.php",
+            type: "POST",
+            data: formData,
+            success: function (data, textStatus, jqXHR) {
+                //console.log(JSON.parse(data));
+                window['active' + i] = JSON.parse(data);
+                //data - response from server
+                //console.log(window['active'+i]);
+
+
+                try {
+                    $('#lbl-stream-href-' + window['active' + i]['name'].replace(/.stream/, '')).html(window['active' + i].sourceIp)
+                    if (window['active' + i]['isConnected']) {
+                        $('#lbl-stream-status-' + window['active' + i]['name'].replace(/.stream/, '')).html('<a href="#" onclick=resetstream("' + streamname + '")>Connected</a>');
+                        $('#lbl-stream-' + streamname).html(streamname);
+                    } else {
+                        $('#lbl-stream-status-' + window['active' + i]['name'].replace(/.stream/, '')).html('<a href="#" onclick=connect_stream("' + streamname + '")> <i class="fa fa-repeat" aria-hidden="true"></i>&nbsp; Not connected</a>');
+                        $('#lbl-stream-' + streamname).html(streamname);
+                    }
+
+                } catch (e) {
+                    //console.log(e);
+                    $('#lbl-stream-status-' + streamname).html('<a href="#" onclick=connect_stream("' + streamname + '")>Not connected</a>');
+                    $('#lbl-stream-' + streamname).html(streamname);
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //console.log(jqXHR);
+            }
+        });
+    }
+
+    function connect_stream(streamname) {
+        // console.log(streamname);
+        var formData = "streamname=" + streamname;
+        $.ajax({
+            url: serverURL + "connect_stream.php",
+            type: "POST",
+            data: formData,
+            success: function (data, textStatus, jqXHR) {
+                //console.log(JSON.parse(data));
+                $('#lbl-stream-' + streamname).prepend('<img src="images/spin.gif" width="20px" height=20px>&nbsp;');
+                //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+                try {
+
+
+                } catch (e) {
+
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+    }
+
+    function deletestream(streamname) {
+        var r = confirm("Do you want to update this Stream?\nStream Name: " + streamname);
+        if (r == true) {
+            //console.log(streamname);
+            var formData = "streamname=" + streamname;
+            $.ajax({
+                url: serverURL + "delete_stream.php",
+                type: "POST",
+                data: formData,
+                beforeSend: function () {
+                    $('#lbl-stream-' + streamname).prepend('<img src="images/spin.gif" width="20px" height=20px>&nbsp;');
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log(JSON.parse(data));
+                    setTimeout(function () {
+                        window.location = "stream-overview.html";
+                    }, 3000);
+                    try {
+
+
+                    } catch (e) {
+
+                    }
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+        }
+    }
+
+    $('#streamadd_submit').on('click', function () {
+        //console.log(streamname);
+        var formData = "streamname=" + $('#stream_name').val() + "&streamurl=" + $('#stream_url').val();
+        console.log(formData);
+        $.ajax({
+            url: serverURL + "add_stream.php",
+            type: "POST",
+            data: formData,
+            beforeSend: function () {
+                $('#allstream_status').append('&nbsp;&nbsp;<img src="images/spin.gif" width="20px" height=20px>');
+            },
+            success: function (data, textStatus, jqXHR) {
+                console.log(JSON.parse(data));
+                //setTimeout(function(){ window.location = "stream-overview.html"; }, 3000);
+                try {
+                    if (JSON.parse(data) == 1) {
+                        window.location = "stream-overview.html";
+                    } else {
+                        $('#allstream_status').empty();
+                    }
+
+                } catch (e) {
+
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+    })
+
+    function resetstream(streamname) {
+        // console.log(streamname);
+        var formData = "streamname=" + streamname;
+        $.ajax({
+            url: serverURL + "reset_stream.php",
+            type: "POST",
+            data: formData,
+            success: function (data, textStatus, jqXHR) {
+                //console.log(JSON.parse(data));
+                $('#lbl-stream-' + streamname).prepend('<img src="images/spin.gif" width="20px" height=20px>&nbsp;');
+                //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+                try {
+
+
+                } catch (e) {
+
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+    }
+}
 
 
 
