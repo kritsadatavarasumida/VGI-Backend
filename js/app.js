@@ -451,7 +451,12 @@ if (page === "push") {
                     //html += '<td class="a-center"><input class="icheckbox_flat-green" type="checkbox" name="table_records"></td>';
                     html += '<td class=" ">' + data.data[i].tid + '</td>';
                     html += '<td class=" " id="lbl-tagname-' + data.data[i].tid + '">' + data.data[i].tag_name + '</td>';
-                    html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '"><a href=# onclick=deletemember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")>' + data.data[i].username + '</a></td>';
+                    html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '"><a href=# onclick=deletemember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")>' + data.data[i].username
+                    if (data.data.length > 1) {
+                        html += '</a></td>';
+                    } else {
+                        html += '</a>&nbsp;<a href=#><i class="fa fa-plus" aria-hidden="true"></i></a></td>'
+                    }
                     html += '<td class=" last"><a href="#" onclick=modifytags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletetags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;<a href="#" ><i class="fa fa-paper-plane" aria-hidden="true"></i></a></td>';
                     html += '</tr>';
                 } else {
@@ -471,7 +476,13 @@ if (page === "push") {
                         //html += '<td class="a-center"><input type="checkbox" class="icheckbox_flat-green" name="table_records" id="userbox' + i + '"></td>"';
                         html += '<td class=" ">' + data.data[i].tid + '</td>';
                         html += '<td class=" " id="lbl-tagname-' + data.data[i].tid + '">' + data.data[i].tag_name + '</td>';
-                        html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '"><a href=# onclick=deletemember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")>' + data.data[i].username + '</a></td>';
+                        html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '"><a href=# onclick=deletemember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")>' + data.data[i].username
+                        if (data.data.length > 1) {
+                            html += '</a>&nbsp;<a href=#><i class="fa fa-plus" aria-hidden="true"></a></i></td>'
+
+                        } else {
+                            html += '</a></td>';
+                        }
                         html += '<td class=" last"><a href="#" onclick=modifytags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletetags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;<a href="#" ><i class="fa fa-paper-plane" aria-hidden="true"></i></a></td>';
                         html += '</tr>';
                     }
@@ -769,10 +780,10 @@ if (page === "stream_overview") {
                 html = '<tr class="even pointer">';
                 //html += '<td class="a-center"><input class="icheckbox_flat-green" type="checkbox" name="table_records"></td>';
                 html += '<td class=" " id="lbl-stream-' + allstream[i].id + '">' + allstream[i].id + '</td>';
-                html += '<td class=" " id="lbl-stream-href-' + allstream[i].id + '">' + allstream[i].href + '</td>';
-                html += '<td class=" " id="lbl-stream-status-' + allstream[i].id + '"><a href="#" onclick=connect_stream("' + allstream[i].id + '")>Not connected</a></td>';
+                html += '<td class=" " id="lbl-stream-href-' + allstream[i].id + '">' + allstream[i].href + '<br/><small id="lbl-small-href-' + allstream[i].id + '"></small></td>';
+                html += '<td class=" " id="lbl-stream-status-' + allstream[i].id + '"><a href="#" onclick=connect_stream("' + allstream[i].id + '")><img src="images/spin.gif" width="20px" height=20px></a></td>';
                 //html += '<td class=" " id="lbl-tag-' + data.data[i].tid + '">' + data.data[i].username + '</td>';
-                html += '<td class=" last"><a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-desktop" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletestream("' + allstream[i].id + '")><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                html += '<td class=" last"><a href="#" onclick=modifystream("' + allstream[i].id + '",' + i + ',"' + allstream[i].href + '")><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-desktop" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletestream("' + allstream[i].id + '")><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
                 html += '</tr>';
                 $('#streamtable').append(html);
                 window['timeactive' + i] = setInterval(function (i) {
@@ -815,7 +826,7 @@ if (page === "stream_overview") {
 
 
                 try {
-                    $('#lbl-stream-href-' + window['active' + i]['name'].replace(/.stream/, '')).html(window['active' + i].sourceIp)
+                    $('#lbl-small-href-' + window['active' + i]['name'].replace(/.stream/, '')).html(window['active' + i].sourceIp)
                     if (window['active' + i]['isConnected']) {
                         $('#lbl-stream-status-' + window['active' + i]['name'].replace(/.stream/, '')).html('<a href="#" onclick=resetstream("' + streamname + '")>Connected</a>');
                         $('#lbl-stream-' + streamname).html(streamname);
@@ -954,6 +965,53 @@ if (page === "stream_overview") {
                 console.log(jqXHR);
             }
         });
+    }
+
+    function modifystream(streamname, i, href) {
+        var inputtxt = "";
+        inputtxt = '<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">';
+        inputtxt += '<input type="text" class="form-control has-feedback-left" placeholder="Stream URL" id="stream_temp_url' + i + '">';
+        inputtxt += '<span class="fa fa-youtube-play form-control-feedback left" aria-hidden="true"></span>';
+        inputtxt += '</div>';
+        inputtxt += '<a class="btn btn-success" id="streamtemp_submit' + i + '">Submit</a>';
+        inputtxt += '<a class="btn btn-danger" id="streamtemp_cancel' + i + '">Cancel</a>';
+        $('#lbl-stream-href-' + streamname).html(inputtxt);
+        $('#streamtemp_cancel' + i).on('click', function () {
+            $('#lbl-stream-href-' + streamname).html(href + '<br/><small id="lbl-small-href-' + streamname + '"></small>');
+        })
+
+        $('#streamtemp_submit' + i).on('click', function () {
+            var formData = "streamname=" + streamname + "&streamurl=" + $('#stream_temp_url' + i).val();
+            $.ajax({
+                url: serverURL + "update_stream.php",
+                type: "POST",
+                data: formData,
+                beforeSend: function () {
+                    $('#streamtemp_submit' + i).append('&nbsp;<img src="images/spin.gif" width="20px" height=20px>');
+                },
+                success: function (data, textStatus, jqXHR) {
+                    //console.log(JSON.parse(data));
+
+                    //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+                    try {
+                        if (JSON.parse(data) == 1) {
+                            window.location = "stream-overview.html";
+                        } else {
+
+                        }
+
+                    } catch (e) {
+
+                    }
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+        })
+
     }
 }
 

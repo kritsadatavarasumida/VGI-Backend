@@ -284,9 +284,50 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
+
+                                <div class="col-md-12 col-sm-6 col-xs-6">
+                                    <div id="mainb" style="height:350px;"></div>
+
+                                    <div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2><i class="fa fa-bars"></i> Stream(s) Management
+                                        <small id="stream_status"></small>
+                                    </h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">Settings 1</a>
+                                                </li>
+                                                <li><a href="#">Settings 2</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
                                 <form class="form-horizontal form-label-left input_mask">
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-0 form-group has-feedback">
+                                            <label for="stream_name">Add new stream</label>
                                             <input type="text" class="form-control has-feedback-left"
                                                    placeholder="stream_name" id="stream_name">
                                             <span class="fa fa-film form-control-feedback left"
@@ -302,8 +343,8 @@
                                             <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-0">
                                                 <a class="btn btn-primary" id="streamadd_cancel">Cancel</a>
                                                 <a class="btn btn-success" id="streamadd_submit">Submit</a>
-                                            </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </form>
                             </div>
@@ -393,6 +434,9 @@
 <script src="js/icheck/icheck.min.js"></script>
 
 <script src="js/custom.js"></script>
+    <!-- echart -->
+    <script src="js/echart/echarts-all.js"></script>
+    <script src="js/echart/green.js"></script>
 
 <!-- pace -->
 <script src="js/pace/pace.min.js"></script>
@@ -401,7 +445,71 @@
 </script>
 <script src="js/server.js"></script>
 <script src="js/app.js"></script>
-
+    <script>
+        var myChart9 = echarts.init(document.getElementById('mainb'), theme);
+        myChart9.setOption({
+            title: {
+                x: 'center',
+                y: 'top',
+                padding: [0, 0, 20, 0],
+                text: 'Stream Bandwidth Usage :: BytesIn and BytesOut',
+                textStyle: {
+                    fontSize: 15,
+                    fontWeight: 'normal'
+                }
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: {
+                        show: true,
+                        readOnly: false
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            calculable: true,
+            legend: {
+                data: ['BytesIn', 'BytesOut'],
+                y: 'bottom'
+            },
+            xAxis: [{
+                type: 'category',
+                data: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+            }],
+            yAxis: [{
+                type: 'value',
+                name: 'BytesIn',
+                axisLabel: {
+                    formatter: '{value} Bytes'
+                }
+            }, {
+                type: 'value',
+                name: 'BytesOut',
+                axisLabel: {
+                    formatter: '{value} Bytes'
+                }
+            }],
+            series: [{
+                name: 'BytesIn',
+                type: 'line',
+                data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+            }, {
+                name: 'BytesOut',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+            }]
+        });
+    </script>
 </body>
 
 </html>

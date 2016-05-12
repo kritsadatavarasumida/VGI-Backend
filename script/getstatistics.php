@@ -1,13 +1,15 @@
 <?php
-include('../json/mysql2json.class.php');
-include('../json/connect.php');
+ob_start();
+include('/var/www/html/streammgmt/json/mysql2json.class.php');
+include('/var/www/html/streammgmt/json/connect.php');
 ?>
 
 <?php
+
 //header('Content-type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 
-$streamlist = exec('curl --digest -u wadmin:comlab03 -X GET --header "Accept:application/json; charset=utf-8" "http://192.168.158.132:8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/vgi/monitoring/current"');
+$streamlist = exec('curl --digest -u wadmin:comlab03 -s -X GET --header "Accept:application/json; charset=utf-8" "http://192.168.158.132:8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/vgi/monitoring/current"');
 
 $streamlist;
 
