@@ -7,14 +7,8 @@ include('connect.php');
 header('Content-type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 $num=0;
-isset($_REQUEST['tid']) ? $tid = $_REQUEST['tid'] : $tid = '';
-isset($_REQUEST['username']) ? $username = $_REQUEST['username'] : $username = '';
-if ($tid != '' && $username != '' ) {
-$sql="select * from v_tags_customer where tid='".$tid."' and username='".$username."'";
-
-} else {
-$sql="select * from v_tags_customer order by id";
-}
+isset($_REQUEST['tagname']) ? $tagname = $_REQUEST['tagname'] : $tagname = '';
+$sql="select * from v_tags_customer where tag_name='".$tagname."'";
 $result=mysql_query($sql) or die(mysql_error());
 $num=mysql_affected_rows();
 $objJSON=new mysql2json();

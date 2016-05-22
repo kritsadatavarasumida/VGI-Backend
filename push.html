@@ -95,7 +95,7 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="stream-overview.html">Overview</a>
                                     </li>
-                                    <li><a href="stream-add.html">Add new streaming</a>
+                                    <li><a href="bts-stream.html">Streaming for BTS</a>
                                     </li>
                                 </ul>
                             </li>
@@ -381,8 +381,36 @@
 
                                             </form>
                                         </div>
-                                        <div class="tab-pane" id="member-r">Messages Tab.</div>
+                                        <div class="tab-pane" id="member-r">
+                                            <form class="form-horizontal form-label-left input_mask">
 
+                                                <div class="col-md-6 col-sm-6 col-xs-6 form-group has-feedback">
+                                                    <input type="text" class="form-control has-feedback-left"
+                                                           placeholder="Tag Name" id="tag_name_member">
+                                                    <span class="fa fa-tag form-control-feedback left"
+                                                          aria-hidden="true"></span>
+
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 form-group has-feedback"
+                                                     id="tag_init_member_div">
+                                                    <input type="text" class="form-control has-feedback-left"
+                                                           placeholder="Initial Member" id="tag_init_member">
+                                                    <span class="fa fa-tag form-control-feedback left"
+                                                          aria-hidden="true"></span>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-0">
+                                                        <a class="btn btn-primary"
+                                                           id="tag_name_member_cancel">Cancel</a>
+                                                        <a class="btn btn-success"
+                                                           id="tag_name_member_submit">Submit</a>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
 

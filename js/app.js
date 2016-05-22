@@ -430,6 +430,8 @@ if (page === "customer-profile") {
 }
 
 if (page === "push") {
+    $('#tag_init_member_div').hide();
+    $('#tag_name_member_submit').hide();
     var tags = [];
     var formData = "";
     $.ajax({
@@ -437,13 +439,14 @@ if (page === "push") {
         type: "POST",
         data: formData,
         success: function (data, textStatus, jqXHR) {
-            console.log(JSON.stringify(data.data));
+            //console.log(JSON.stringify(data.data));
 
             //data - response from server
 
 
             for (var i = 0; i < data.data.length; i++) {
                 html = "";
+
                 //console.log(data.data.length);
                 if (i == 0) {
                     tags.push(data.data[i].tid);
@@ -455,7 +458,7 @@ if (page === "push") {
                     if (data.data.length > 1) {
                         html += '</a></td>';
                     } else {
-                        html += '</a>&nbsp;<a href=#><i class="fa fa-plus" aria-hidden="true"></i></a></td>'
+                        // html += '</a>&nbsp;<a href=# onclick=addmember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")><i class="fa fa-plus" aria-hidden="true"></i></a></td>'
                     }
                     html += '<td class=" last"><a href="#" onclick=modifytags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletetags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;<a href="#" ><i class="fa fa-paper-plane" aria-hidden="true"></i></a></td>';
                     html += '</tr>';
@@ -465,11 +468,16 @@ if (page === "push") {
                         if (data.data[i].tid == tags[j]) {
                             tagsexist = 1;
 
+                        } else {
+                            tagsexist = 0;
                         }
+
 
                     }
                     if (tagsexist == 1) {
                         $("#lbl-tag-" + data.data[i].tid).append(', <a href=# onclick=deletemember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")>' + data.data[i].username + '</a>');
+
+
                     } else {
                         tags.push(data.data[i].tid);
                         html = '<tr class="even pointer">';
@@ -486,9 +494,16 @@ if (page === "push") {
                         html += '<td class=" last"><a href="#" onclick=modifytags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#" onclick=deletetags(' + data.data[i].tid + ',"' + data.data[i].tag_name + '")><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;<a href="#" ><i class="fa fa-paper-plane" aria-hidden="true"></i></a></td>';
                         html += '</tr>';
                     }
+
                 }
+
                 $('#overviewtagstable').append(html);
+                if (i == (data.data.length - 1)) {
+                    shtml = '</a>&nbsp;<a href=# onclick=addmember(' + data.data[i].tid + ',"' + data.data[i].tag_name + '",' + data.data[i].cid + ',"' + data.data[i].username + '")><i class="fa fa-plus" aria-hidden="true"></a></i>';
+                    $("#lbl-tag-" + data.data[i].tid).append(shtml);
+                }
             }
+
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -540,6 +555,107 @@ if (page === "push") {
         } else {
 
         }
+    }
+
+    function addmember(tid, tag_name, cid, username) {
+        window["member" + tid] = "";
+        console.log("add clicked");
+        window["same" + tid] = 0;
+        var inputtxt = "";
+        inputtxt = '<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">';
+        inputtxt += '<input type="text" class="form-control has-feedback-left" placeholder="Member Name" id="tag_member' + tid + '" value=' + "" + '>';
+        inputtxt += '<span class="fa fa-tag form-control-feedback left" aria-hidden="true"></span>';
+        inputtxt += '</div>';
+        inputtxt += '<a class="btn btn-success" id="tagmember_submit' + tid + '">Submit</a>';
+        inputtxt += '<a class="btn btn-danger" id="tagmember_cancel' + tid + '">Cancel</a>'
+        window["member" + tid] = $('#lbl-tag-' + tid).html();
+        console.log(window["member" + tid]);
+        $('#lbl-tag-' + tid).html(inputtxt);
+
+        $('#tagmember_cancel' + tid).on('click', function () {
+            $('#lbl-tag-' + tid).html(window["member" + tid]);
+        })
+
+        $('#tagmember_submit' + tid).on('click', function () {
+            var formData = "tid=" + tid + "&username=" + $('#tag_member' + tid).val();
+            $.ajax({
+                url: serverURL + "add_tag_member.php",
+                type: "POST",
+                data: formData,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(JSON.stringify(data));
+                    //data - response from server
+                    if (data == 1) {
+                        window.location = "push.html";
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+
+            //window.location = "push.html";
+        })
+
+        $('#tag_member' + tid).on('keyup', function () {
+            var formData = "tid=" + tid + "&username=" + $('#tag_member' + tid).val();
+            $.ajax({
+                url: serverURL + "customer_username_check.php",
+                type: "POST",
+                data: formData,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(JSON.stringify(data.data));
+                    //data - response from server
+                    if (window['same' + tid] == 0) {
+                        try {
+                            if (data.data[0].username == $('#tag_member' + tid).val()) {
+                                $('#tag_member' + tid).removeClass("red");
+                                $('#tagmember_submit' + tid).show();
+                            } else {
+                                $('#tag_member' + tid).addClass("red");
+                                $('#tagmember_submit' + tid).hide();
+                            }
+
+                        } catch (e) {
+                            $('#tag_member' + tid).addClass("red");
+                            $('#tagmember_submit' + tid).hide();
+                        }
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+
+            $.ajax({
+                url: serverURL + "list-tags-mapping.php",
+                type: "POST",
+                data: formData,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(JSON.stringify(data.data));
+                    //data - response from server
+                    try {
+                        if (data.data[0].username == $('#tag_member' + tid).val()) {
+                            $('#tag_member' + tid).addClass("red");
+                            $('#tagmember_submit' + tid).hide();
+                            window['same' + tid] = 1;
+                        } else {
+                            window['same' + tid] = 0;
+                        }
+
+                    } catch (e) {
+
+
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+        })
     }
 
     $('#tagadd_submit').on('click', function () {
@@ -596,7 +712,7 @@ if (page === "push") {
         type: "POST",
         data: formData,
         success: function (data, textStatus, jqXHR) {
-            console.log(JSON.stringify(data.data));
+            //console.log(JSON.stringify(data.data));
 
             //data - response from server
 
@@ -619,6 +735,78 @@ if (page === "push") {
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);
         }
+    });
+
+    $('#tag_name_member').on('keyup', function () {
+        var formData = "tagname=" + $('#tag_name_member').val();
+        window['tagexist'] = 0;
+
+        $.ajax({
+            url: serverURL + "get-tag-tagname.php",
+            type: "POST",
+            data: formData,
+            success: function (data, textStatus, jqXHR) {
+                console.log(JSON.stringify(data.data));
+                //data - response from server
+
+                try {
+                    if (data.data.length > 0) {
+                        window['tagexist'] = 1;
+                        $('#tag_name_member').addClass("red");
+                        //$('#tag_name_member_submit').hide();
+                        $('#tag_init_member_div').hide();
+                        $('#tag_init_member').val("");
+                    } else {
+                        window['tagexist'] = 0;
+                    }
+
+                } catch (e) {
+                    window['tagexist'] = 0;
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+
+        $.ajax({
+            url: serverURL + "tagname_check.php",
+            type: "POST",
+            data: formData,
+            success: function (data, textStatus, jqXHR) {
+                //console.log(JSON.stringify(data.data));
+                //data - response from server
+                if (window['tagexist'] == 0) {
+                    try {
+                        if (data.data[0].tag_name == $('#tag_name_member').val()) {
+                            $('#tag_name_member').removeClass("red");
+                            //$('#tag_name_member_submit').show();
+                            $('#tag_init_member_div').show();
+
+
+                        } else {
+                            $('#tag_name_member').addClass("red");
+                            //$('#tag_name_member_submit').hide();
+                            $('#tag_init_member_div').hide();
+                            $('#tag_init_member').val("");
+                        }
+
+                    } catch (e) {
+                        $('#tag_name_member').addClass("red");
+                        //$('#tag_name_member_submit').hide();
+                        $('#tag_init_member_div').hide();
+                        $('#tag_init_member').val("");
+                    }
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
     });
 
     function modifytags(tid, tagname) {
@@ -768,10 +956,10 @@ if (page === "stream_overview") {
         type: "POST",
         data: formData,
         success: function (data, textStatus, jqXHR) {
-            console.log(JSON.parse(data));
+            // console.log(JSON.parse(data));
             stream = JSON.parse(data);
             allstream = stream.streamFiles;
-            console.log(allstream);
+            //console.log(allstream);
             //data - response from server
 
             for (var i = 0; i < allstream.length; i++) {
@@ -1015,10 +1203,158 @@ if (page === "stream_overview") {
     }
 }
 
+if (page === "main") {
+    console.log('main');
+    setInterval(function () {
+        $.ajax({
+            url: scriptURL + "getmariadb.php",
+            type: "POST",
+            data: formData,
+            beforeSend: function () {
+
+            },
+            success: function (data, textStatus, jqXHR) {
+                //console.log(data);
+
+                //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+                try {
+                    if (data == 1) {
+                        $("#dbstatus").removeClass("red");
+                        $("#dbstatus").addClass("green");
+                        $("#dbstatus").html(" UP");
+                    } else {
+                        $("#dbstatus").removeClass("green");
+                        $("#dbstatus").addClass("red");
+                        $("#dbstatus").html(" Down")
+                    }
+                } catch (e) {
+
+                }
 
 
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+
+        $.ajax({
+            url: scriptURL + "gethttpd.php",
+            type: "POST",
+            data: formData,
+            beforeSend: function () {
+
+            },
+            success: function (data, textStatus, jqXHR) {
+                //console.log(data);
+
+                //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+                try {
+                    if (data == 1) {
+                        $("#httpdstatus").removeClass("red");
+                        $("#httpdstatus").addClass("green");
+                        $("#httpdstatus").html(" UP");
+                    } else {
+                        $("#httpdstatus").removeClass("green");
+                        $("#httpdstatus").addClass("red");
+                        $("#httpdstatus").html(" Down")
+                    }
+                } catch (e) {
+
+                }
 
 
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
 
 
+        $.ajax({
+            url: scriptURL + "getstreamengine.php",
+            type: "POST",
+            data: formData,
+            beforeSend: function () {
+
+            },
+            success: function (data, textStatus, jqXHR) {
+                //console.log(data);
+
+                //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+                try {
+                    if (data == 1) {
+                        $("#wzstatus").removeClass("red");
+                        $("#wzstatus").addClass("green");
+                        $("#wzstatus").html(" UP");
+                    } else {
+                        $("#wzstatus").removeClass("green");
+                        $("#wzstatus").addClass("red");
+                        $("#wzstatus").html(" Down")
+                    }
+                } catch (e) {
+
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+
+        $.ajax({
+            url: serverURL + "get_stream_list.php",
+            type: "POST",
+            data: formData,
+            beforeSend: function () {
+
+            },
+            success: function (data, textStatus, jqXHR) {
+                stream = JSON.parse(data);
+                allstream = stream.streamFiles;
+                //console.log(allstream);
+
+                //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+                try {
+
+                    $("#noofstream").html(allstream.length);
+
+                } catch (e) {
+
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+
+        $.ajax({
+            url: serverURL + "list-customer-account.php",
+            type: "POST",
+            data: formData,
+            beforeSend: function () {
+
+            },
+            success: function (data, textStatus, jqXHR) {
+
+                //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+                try {
+
+                    $("#noofcustomer").html(data.data.length);
+
+                } catch (e) {
+
+                }
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+    }, 5000);
+}
 

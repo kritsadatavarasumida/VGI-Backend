@@ -90,7 +90,7 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="stream-overview.html">Overview</a>
                                     </li>
-                                    <li><a href="stream-add.html">Add new streaming</a>
+                                    <li><a href="bts-stream.html">Streaming for BTS</a>
                                     </li>
                                 </ul>
                             </li>
@@ -272,14 +272,16 @@
                                     <div class="left"></div>
                                     <div class="right">
                                         <span class="count_top"><i class="fa fa-database"></i> Database </span>
-                                        <div class="count"> UP</div>
+                                        <div class="count" id="dbstatus">&nbsp;<img src="images/spin.gif" width="20px"
+                                                                                    height=20px></div>
                                     </div>
                                 </div>
                                 <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
                                     <div class="left"></div>
                                     <div class="right">
                                         <span class="count_top"><i class="fa fa-code-fork"></i> Application API </span>
-                                        <div class="count"> UP</div>
+                                        <div class="count" id="httpdstatus">&nbsp;<img src="images/spin.gif"
+                                                                                       width="20px" height=20px></div>
                                     </div>
                                 </div>
                                 <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
@@ -287,7 +289,8 @@
                                     <div class="right">
                                         <span class="count_top"><i
                                                 class="fa fa-video-camera"></i> Streaming Server </span>
-                                        <div class="green count"> UP</div>
+                                        <div class="count" id="wzstatus">&nbsp;<img src="images/spin.gif" width="20px"
+                                                                                    height=20px></div>
                                     </div>
                                 </div>
                             </div>
@@ -297,14 +300,16 @@
                                     <div class="right">
                                         <span class="count_top"><i
                                                 class="fa fa-file-video-o"></i> No. of Streams </span>
-                                        <div class="count"> 151</div>
+                                        <div class="count" id="noofstream">&nbsp;<img src="images/spin.gif" width="20px"
+                                                                                      height=20px></div>
                                     </div>
                                 </div>
                                 <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
                                     <div class="left"></div>
                                     <div class="right">
                                         <span class="count_top"><i class="fa fa-users"></i> No. of Customers </span>
-                                        <div class="count"> 50</div>
+                                        <div class="count" id="noofcustomer">&nbsp;<img src="images/spin.gif"
+                                                                                        width="20px" height=20px></div>
                                     </div>
                                 </div>
                                 <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
@@ -312,7 +317,8 @@
                                     <div class="right">
                                         <span class="count_top"><i
                                                 class="fa fa-circle-o-notch"></i> No. of Views </span>
-                                        <div class="count"> 5000</div>
+                                        <div class="count" id="noofview">&nbsp;<img src="images/spin.gif" width="20px"
+                                                                                    height=20px></div>
                                     </div>
                                 </div>
                             </div>
