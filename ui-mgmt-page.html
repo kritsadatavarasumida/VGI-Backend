@@ -98,7 +98,7 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="ui-overview.html">Overview</a>
                                     </li>
-                                    <li><a href="ui-mgmt-category.html">UI Category Management</a>
+                                    <li><a href="ui-mgmt-page.html">UI Pages Management</a>
                                     </li>
                                     <li><a href="ui-mgmt-template.html">UI Template Management</a>
                                     </li>
@@ -252,89 +252,117 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Overview Dashboard</h3>
+                        <h3>UI Management</h3>
                     </div>
 
 
                 </div>
                 <div class="clearfix"></div>
-                <div class="row">
+                <div class="row" id="page-mgmt" style="overflow:auto">
                     <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel" style="height:300px;">
+                            <div class="x_title">
+                                <h2> Add new page : </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class=" ">&nbsp;</a>
+                                    </li>
+                                    <li><a onclick="closenewpage()"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
 
-
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2><i class="fa fa-bars"></i> Stream(s) Management
-                                        <small id="stream_status"></small>
-                                    </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
                                 <form class="form-horizontal form-label-left input_mask">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-0 form-group has-feedback">
-                                            <label for="stream_name">Add new stream</label>
-                                            <input type="text" class="form-control has-feedback-left"
-                                                   placeholder="stream_name" id="stream_name">
-                                            <span class="fa fa-film form-control-feedback left"
-                                                  aria-hidden="true"></span>
-                                        </div>
-                                        <div class="col-md-8 col-sm-6 col-xs-6 col-md-offset-0 form-group has-feedback">
-                                            <input type="text" class="form-control has-feedback-left"
-                                                   placeholder="stream_url" id="stream_url">
-                                            <span class="fa fa-youtube-play form-control-feedback left"
-                                                  aria-hidden="true"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-0">
-                                                <a class="btn btn-primary" id="streamadd_cancel">Cancel</a>
-                                                <a class="btn btn-success" id="streamadd_submit">Submit</a>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" id="add_pagename"
+                                               placeholder="Page Name">
+                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <select class="form-control has-feedback-left" id="icselect">
+                                            <option value="200">Please select number of icons</option>
+                                        </select>
+                                        <span class="fa fa-user form-control-feedback left"></span>
+                                    </div>
+
+                                    <div class="" id="icgroup">
+
+
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <select class="form-control has-feedback-left" id="tpselect">
+                                            <option value="0">Please select template type</option>
+
+                                        </select>
+                                        <span class="fa fa-tag form-control-feedback left" aria-hidden="true"
+                                              id="username_tag"></span>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <select class="form-control has-feedback-left" id="bnselect">
+                                            <option value="0" data-imageurl="0">No Banner</option>
+                                        </select>
+                                        <span class="form-control-feedback left"
+                                              id="banner_pic"></span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9 col-xs-12 form-group has-feedback">
+                                        <div id="tp_preview"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-0">
+                                            <a class="btn btn-primary" id="add_cancel">Cancel</a>
+                                            <a class="btn btn-success" id="add_submit">Submit</a>
                                         </div>
                                     </div>
-                                    </div>
+
                                 </form>
+
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
 
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel" style="height:600px;">
+                            <div class="x_title">
+                                <h2> UI Page Management : </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a class=" " id="pageadd"><i class="fa fa-plus"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
                             <div class="x_content">
+
                                 <table class="table table-striped responsive-utilities">
                                     <thead>
                                     <tr class="headings">
 
-                                        <th class="column-title">Stream-ID</th>
-                                        <th class="column-title">Stream href</th>
-                                        <th class="column-title">Status</th>
-                                        <th class="column-title no-link last"><span
-                                                class="nobr">Action</span>
+                                        <th class="column-title">Page ID</th>
+                                        <th class="column-title">Page Name</th>
+                                        <th class="column-title">No of Icons</th>
+                                        <th class="column-title">Template</th>
+                                        <th class="column-title">No of Banners</th>
+                                        <th class="column-title no-link last"><span class="nobr">Action</span>
                                         </th>
+
                                     </tr>
                                     </thead>
 
-                                    <tbody id="streamtable">
+                                    <tbody id="listpage">
 
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
 
                 </div>
 
@@ -369,17 +397,15 @@
 <script src="js/icheck/icheck.min.js"></script>
 
 <script src="js/custom.js"></script>
-    <!-- echart -->
-    <script src="js/echart/echarts-all.js"></script>
-    <script src="js/echart/green.js"></script>
 
 <!-- pace -->
 <script src="js/pace/pace.min.js"></script>
 <script>
-    page = "stream_overview";
+    page = "uipage";
 </script>
 <script src="js/server.js"></script>
 <script src="js/app.js"></script>
+
 </body>
 
 </html>

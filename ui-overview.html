@@ -98,7 +98,7 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="ui-overview.html">Overview</a>
                                     </li>
-                                    <li><a href="ui-mgmt-category.html">UI Category Management</a>
+                                    <li><a href="ui-mgmt-page.html">UI Pages Management</a>
                                     </li>
                                     <li><a href="ui-mgmt-template.html">UI Template Management</a>
                                     </li>
@@ -258,83 +258,61 @@
 
                 </div>
                 <div class="clearfix"></div>
+
                 <div class="row">
+
                     <div class="col-md-12 col-sm-12 col-xs-12">
-
-
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2><i class="fa fa-bars"></i> Stream(s) Management
-                                        <small id="stream_status"></small>
-                                    </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
+                        <div class="x_panel" style="height:600px;">
+                            <div class="x_title">
+                                <h2> UI Overview : </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="row tile_count">
+                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                                    <div class="left"></div>
+                                    <div class="right">
+                                        <span class="count_top"><a href="ui-mgmt-banner.html"><i
+                                                class="fa fa-database"></i> No. of Banners</a></span>
+                                        <div class="count" id="noofbanners">&nbsp;<img src="images/spin.gif"
+                                                                                       width="20px"
+                                                                                       height=20px></div>
+                                    </div>
                                 </div>
-                                <div class="x_content">
-                                <form class="form-horizontal form-label-left input_mask">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-0 form-group has-feedback">
-                                            <label for="stream_name">Add new stream</label>
-                                            <input type="text" class="form-control has-feedback-left"
-                                                   placeholder="stream_name" id="stream_name">
-                                            <span class="fa fa-film form-control-feedback left"
-                                                  aria-hidden="true"></span>
-                                        </div>
-                                        <div class="col-md-8 col-sm-6 col-xs-6 col-md-offset-0 form-group has-feedback">
-                                            <input type="text" class="form-control has-feedback-left"
-                                                   placeholder="stream_url" id="stream_url">
-                                            <span class="fa fa-youtube-play form-control-feedback left"
-                                                  aria-hidden="true"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-0">
-                                                <a class="btn btn-primary" id="streamadd_cancel">Cancel</a>
-                                                <a class="btn btn-success" id="streamadd_submit">Submit</a>
-                                        </div>
+                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                                    <div class="left"></div>
+                                    <div class="right">
+                                        <span class="count_top"><a href="ui-mgmt-icons.html"><i
+                                                class="fa fa-code-fork"></i> No. of Icons</a></span>
+                                        <div class="count" id="nooficons">&nbsp;<img src="images/spin.gif"
+                                                                                     width="20px" height=20px></div>
                                     </div>
+                                </div>
+                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                                    <div class="left"></div>
+                                    <div class="right">
+                                        <span class="count_top"><i
+                                                class="fa fa-video-camera"><a href="ui-mgmt-template.html"></i> No. of Templates used</a></span>
+                                        <div class="count" id="nooftemplates">&nbsp;<img src="images/spin.gif"
+                                                                                         width="20px"
+                                                                                         height=20px></div>
                                     </div>
-                                </form>
+                                </div>
+                            </div>
+                            <div class="row tile_count">
+                                <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                                    <div class="left"></div>
+                                    <div class="right">
+                                        <span class="count_top"><i
+                                                class="fa fa-file-video-o"><a
+                                                href="ui-mgmt-page.html"></i> No. of Pages</a> </span>
+                                        <div class="count" id="noofpages">&nbsp;<img src="images/spin.gif" width="20px"
+                                                                                     height=20px></div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-
-
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-
-                            <div class="x_content">
-                                <table class="table table-striped responsive-utilities">
-                                    <thead>
-                                    <tr class="headings">
-
-                                        <th class="column-title">Stream-ID</th>
-                                        <th class="column-title">Stream href</th>
-                                        <th class="column-title">Status</th>
-                                        <th class="column-title no-link last"><span
-                                                class="nobr">Action</span>
-                                        </th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody id="streamtable">
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
 
                 </div>
 
@@ -369,17 +347,15 @@
 <script src="js/icheck/icheck.min.js"></script>
 
 <script src="js/custom.js"></script>
-    <!-- echart -->
-    <script src="js/echart/echarts-all.js"></script>
-    <script src="js/echart/green.js"></script>
 
 <!-- pace -->
 <script src="js/pace/pace.min.js"></script>
 <script>
-    page = "stream_overview";
+    page = "uioverview";
 </script>
 <script src="js/server.js"></script>
 <script src="js/app.js"></script>
+
 </body>
 
 </html>

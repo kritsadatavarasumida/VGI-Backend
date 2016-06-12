@@ -1358,3 +1358,432 @@ if (page === "main") {
     }, 5000);
 }
 
+if (page === "uioverview") {
+    $.ajax({
+        url: serverURL + "list-icons.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+
+                $("#nooficons").html(data.data.length);
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+    $.ajax({
+        url: serverURL + "list-pages.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+
+                $("#noofpages").html(data.data.length);
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+    $.ajax({
+        url: serverURL + "list-banners.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+
+                $("#noofbanners").html(data.data.length);
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+    $.ajax({
+        url: serverURL + "list-templates.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+
+                $("#nooftemplates").html(data.data.length);
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+}
+
+
+if (page === "uiicons") {
+    $.ajax({
+        url: serverURL + "list-icons.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+                var html = "";
+                console.log(data);
+                for (var i = 0; i < data.data.length; i++) {
+                    // console.log("start");
+                    html = "<tr>";
+                    html += "<td>" + data.data[i].iid + "</td>";
+                    html += "<td><span>" + data.data[i].icon_name + "</span></td>";
+                    html += "<td>" + data.data[i].icon_url + "</td>";
+                    html += "<td>" + data.data[i].linkto + "</td>";
+                    html += "<td>" + data.data[i].next_page + "</td>";
+                    html += "<td>" + data.data[i].iorder + "</td>";
+                    html += "<td>" + data.data[i].iurl + "</td>";
+                    html += "<td><img src='http://104.199.155.2/streammgmt/images/icon/" + data.data[i].icon_url + "' height='40px'></td>";
+                    html += '<td class=" last"><a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                    html += "</tr>";
+                    $("#listpage").append(html);
+                }
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+
+}
+
+
+if (page === "uibanner") {
+    $.ajax({
+        url: serverURL + "list-banners.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+                var html = "";
+                console.log(data);
+                for (var i = 0; i < data.data.length; i++) {
+                    // console.log("start");
+                    html = "<tr>";
+                    html += "<td>" + data.data[i].bid + "</td>";
+                    html += "<td>" + data.data[i].banner_name + "</td>";
+                    html += "<td>" + data.data[i].url + "</td>";
+                    html += "<td><img src='http://104.199.155.2/streammgmt/images/banner/" + data.data[i].url + "' height='40px'></td>";
+                    html += '<td class=" last"><a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                    html += "</tr>";
+                    $("#listpage").append(html);
+                }
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+
+}
+
+if (page === "uitemplate") {
+    $.ajax({
+        url: serverURL + "list-templates.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+                var html = "";
+                console.log(data);
+                for (var i = 0; i < data.data.length; i++) {
+                    //console.log("start");
+                    html = "<tr>";
+                    html += "<td>" + data.data[i].tid + "</td>";
+                    html += "<td>" + data.data[i].template_name + "</td>";
+                    html += "<td><img src='http://104.199.155.2/streammgmt/images/template/" + data.data[i].url + "' height='40px'></td>";
+                    html += '<td class=" last"><a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                    html += "</tr>";
+                    $("#listpage").append(html);
+                }
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+
+}
+
+if (page === "uipage") {
+    $('#page-mgmt').hide();
+    //console.log($('#page-mgmt').is(":visible"));
+
+    $('#pageadd').on('click', function () {
+        //console.log('click');
+        if ($('#page-mgmt').css('display') == 'none') {
+            //console.log('click1');
+
+            $('#page-mgmt').show();
+        } else {
+            //console.log('click2');
+
+            $('#page-mgmt').hide();
+        }
+
+    });
+
+    function closenewpage() {
+        $('#page-mgmt').hide();
+    }
+
+
+    $.ajax({
+        url: serverURL + "list-pages.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+                var html = "";
+                console.log(data);
+                for (var i = 0; i < data.data.length; i++) {
+                    //console.log("start");
+                    html = "<tr>";
+                    html += "<td>" + data.data[i].pid + "</td>";
+                    html += "<td>" + data.data[i].page_name + "</td>";
+                    html += "<td>" + data.data[i].number_of_icon + "</td>";
+                    html += "<td>" + data.data[i].template_type + "</td>";
+                    html += "<td>" + data.data[i].number_of_banner + "</td>";
+                    html += '<td class=" last"><a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>';
+                    html += "</tr>";
+                    $("#listpage").append(html);
+                }
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+
+    $.ajax({
+        url: serverURL + "list-templates.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+                var html = "";
+                console.log(data);
+                for (var i = 0; i < data.data.length; i++) {
+                    //console.log("start");
+                    html = "<option value='" + data.data[i].template_name + "'>" + data.data[i].template_name + "</option>";
+                    $("#tpselect").append(html);
+                }
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+
+    $('#tpselect').on('change', function () {
+        if ($("#tpselect").val() != 0) {
+            $('#tp_preview').html('<img src="http://104.199.155.2/streammgmt/images/template/' + $("#tpselect").val() + '.png">');
+        } else {
+            $('#tp_preview').html('');
+        }
+
+    });
+
+    $('#bnselect').on('change', function () {
+        var phtml = "";
+        console.log($("#bnselect").find(':selected').data('imageurl'));
+        if ($("#bnselect").find(':selected').data('imageurl') != 0) {
+            phtml = '<img src="http://104.199.155.2/streammgmt/images/banner/' + $("#bnselect").find(':selected').data('imageurl') + '" width=30>';
+            $("#banner_pic").html(phtml);
+        } else {
+            $("#banner_pic").html('');
+        }
+    });
+
+    $.ajax({
+        url: serverURL + "list-banners.php",
+        type: "POST",
+        data: formData,
+        beforeSend: function () {
+
+        },
+        success: function (data, textStatus, jqXHR) {
+
+            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+            try {
+                var html = "";
+                //console.log(data);
+
+                for (var i = 0; i < data.data.length; i++) {
+                    //console.log("start");
+                    html = "<option value='" + data.data[i].bid + "' data-imageurl=" + data.data[i].url + ">" + data.data[i].banner_name + "</option>";
+                    $("#bnselect").append(html);
+
+                }
+
+            } catch (e) {
+
+            }
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+
+    for (var x = 0; x < 100; x++) {
+        html = "<option value='" + x + "' >" + x + "</option>";
+        $("#icselect").append(html);
+    }
+
+    $('#icselect').on('change', function () {
+        var shtml = "";
+        if ($('#icselect').val() != 0) {
+            $("#icgroup").html('');
+
+            for (var y = 0; y < $('#icselect').val(); y++) {
+                (function (y) {
+                    //$("#icgroup").append((y + 1) + '<br>');
+                    shtml = '<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-0 form-group" >'
+                    shtml += '<select class="form-control has-feedback-left" id="icsel' + (y + 1) + '">';
+
+
+                    $.ajax({
+                        async: false,
+                        url: serverURL + "list-icons.php",
+                        type: "POST",
+                        data: formData,
+                        beforeSend: function () {
+
+                        },
+                        success: function (data, textStatus, jqXHR) {
+
+                            //setTimeout(function(){ window.location = "stream-overview.html"; }, 5000);
+                            try {
+                                var html = "";
+                                //console.log(data);
+                                for (var i = 0; i < data.data.length; i++) {
+                                    shtml += "<option value='" + data.data[i].iid + "' data-imageurl='" + data.data[i].icon_url + "'>" + data.data[i].icon_name + "</option>";
+                                }
+
+                            } catch (e) {
+
+                            }
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(jqXHR);
+                        }
+                    });
+
+                    shtml += '</select>';
+                    shtml += '<span class="form-control-feedback left" aria-hidden="true" data-no="' + (y + 1) + '" id="tnicon' + (y + 1) + '">' + (y + 1) + '</span>';
+                    shtml += '</div>';
+                    $("#icgroup").append(shtml);
+                    $('#icsel' + (y + 1)).on('change', function () {
+                        //console.log(y+1);
+                        html = '<img src="http://104.199.155.2/streammgmt/images/icon/' + $("#icsel" + (y + 1)).find(':selected').data('imageurl') + '" width=25>';
+                        $('#tnicon' + (y + 1)).html(html);
+                    });
+                }(y));
+
+
+            }
+
+
+        } else {
+            $("#icgroup").html('');
+        }
+    });
+}
