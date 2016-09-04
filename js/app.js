@@ -340,8 +340,8 @@ if (page === "customer-account-mgmt") {
                 }
                 html += '</small></td>';
                 html += '<td>';
-                html += '<a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>';
-                html += '<a href="customer-profile.html?mode=edit&cid=' + data.data[i].cid + '" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>';
+                html += '<a href="customer-profile.html?mode=edit&cid=' + data.data[i].cid + '" class="btn btn-info btn-xs"><i class="fa fa-folder"></i> View </a>';
+                html += '<a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Edit </a>';
                 html += '<a href="#" class="btn btn-danger btn-xs" onclick=deletecustomer(' + data.data[i].cid + ',"' + data.data[i].username + '")><i class="fa fa-trash-o"></i> Delete </a>';
                 html += '</td>';
 
@@ -1768,14 +1768,9 @@ if (page === "uipage") {
                     });
 
                     shtml += '</select>';
-                    shtml += '<span class="form-control-feedback left" aria-hidden="true" data-no="' + (y + 1) + '" id="tnicon' + (y + 1) + '">' + (y + 1) + '</span>';
                     shtml += '</div>';
                     $("#icgroup").append(shtml);
-                    $('#icsel' + (y + 1)).on('change', function () {
-                        //console.log(y+1);
-                        html = '<img src="http://104.199.155.2/streammgmt/images/icon/' + $("#icsel" + (y + 1)).find(':selected').data('imageurl') + '" width=25>';
-                        $('#tnicon' + (y + 1)).html(html);
-                    });
+
                 }(y));
 
 
@@ -1786,4 +1781,9 @@ if (page === "uipage") {
             $("#icgroup").html('');
         }
     });
+
+    $('#add_cancel').on('click', function () {
+        window.location = "ui-mgmt-page.html";
+    });
+
 }
